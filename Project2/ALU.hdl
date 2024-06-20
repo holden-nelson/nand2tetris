@@ -56,10 +56,10 @@ CHIP ALU {
     Add16(a =outNX , b =outNY , out = outAddXY );
 
     // choose which function
-    // extra out to check zero and negative
     Mux16(a=outAndXY , b=outAddXY , sel=f , out=fXY);
 
     // negate output
+    // extra out to check zero and negative
     Not16(in=fXY , out=notfXY );
     Mux16(a=fXY , b= notfXY, sel=no , out=out, out[0..7]=nfXYlow, out[8..15]=nfXYhigh, out[15]=ng );
 
@@ -68,11 +68,5 @@ CHIP ALU {
     Or8Way(in=nfXYhigh , out=outHighOneExists );
     Or(a=outLowOneExists , b= outHighOneExists, out= oneExists);
     Not(in=oneExists , out=zr );
-    
-
-
-
-
-
 
 }
